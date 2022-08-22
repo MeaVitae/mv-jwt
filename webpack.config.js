@@ -6,7 +6,7 @@ const eslintPlugin = new ESLintPlugin({
 })
 
 module.exports = {
-  target: 'node',
+  target: 'web',
   mode: 'production',
   entry: './src/index.js',
   output: {
@@ -30,10 +30,5 @@ module.exports = {
   },
   plugins: [
     eslintPlugin
-  ],
-  resolve: {
-    alias: {
-      handlebars: 'handlebars/dist/handlebars.js'
-    }
-  }
+  ]
 }
