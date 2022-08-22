@@ -1,7 +1,7 @@
 {
   "name": "@meavitae/mv-jwt",
-  "version": "1.0.6",
-  "description": "",
+  "version": "1.0.7",
+  "description": "MeaVitae CF Worker JWT",
   "main": "dist/bundle.js",
   "files": [
     "dist/bundle.js"
@@ -16,11 +16,6 @@
   "author": "danrobinson@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/plugin-transform-runtime": "^7.14.5",
-    "@babel/preset-env": "^7.14.5",
-    "babel-jest": "^27.0.2",
-    "babel-loader": "^8.2.2",
     "eslint": "^7.28.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.4",
@@ -32,11 +27,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.14.6",
     "jwt-decode": "^3.1.2"
-  },
-  "standard": {
-    "parser": "@babel/eslint-parser"
   },
   "publishConfig": {
     "access": "public"
