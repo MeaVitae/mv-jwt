@@ -1,15 +1,13 @@
-'use strict'
-
-const {
+import decode from './decode'
+import {
   arrayBufferFromBase64Url,
   base64ToObject,
   checkKeyObject,
   createKey,
   supportedAlgorithms
-} = require('./utils')
-const decode = require('./decode')
+} from './utils'
 
-module.exports = async (jwt, publicJwkAsBase64, options) => {
+export default async (jwt, publicJwkAsBase64, options) => {
   if (typeof jwt !== 'string') throw new Error('JWT string is required')
   if (!publicJwkAsBase64) throw new Error('Public key is required')
   if (!options) throw new Error('Token signing options are required')

@@ -1,5 +1,3 @@
-'use strict'
-
 const supportedAlgorithms = {
   ES384: {
     name: 'ECDSA',
@@ -41,7 +39,7 @@ const objectToBase64Url = payloadObject => arrayBufferToBase64Url(
   new TextEncoder().encode(JSON.stringify(payloadObject))
 )
 
-module.exports = {
+export {
   arrayBufferFromBase64Url,
   arrayBufferToBase64Url,
   base64ToObject,

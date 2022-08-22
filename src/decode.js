@@ -1,8 +1,6 @@
-'use strict'
+import decode from 'jwt-decode'
 
-const decode = require('jwt-decode').default
-
-module.exports = jwt => {
+export default jwt => {
   if (typeof jwt !== 'string') throw new Error('JWT string is required')
 
   const jwtParts = jwt.split('.')

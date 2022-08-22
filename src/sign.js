@@ -1,15 +1,13 @@
-'use strict'
-
-const {
+import {
   arrayBufferToBase64Url,
   base64ToObject,
   checkKeyObject,
   createKey,
   objectToBase64Url,
   supportedAlgorithms
-} = require('./utils')
+} from './utils'
 
-module.exports = async (tokenDataObject, privateJwkAsBase64, options) => {
+export default async (tokenDataObject, privateJwkAsBase64, options) => {
   if (!tokenDataObject) throw new Error('Token data is required')
   if (!privateJwkAsBase64) throw new Error('Private key is required')
   if (!options) throw new Error('Token signing options are required')

@@ -1,10 +1,8 @@
-'use strict'
+import decode from './decode'
+import sign from './sign'
+import verify from './verify'
 
-const decode = require('./decode')
-const sign = require('./sign')
-const verify = require('./verify')
-
-module.exports = {
+export {
   sign,
   verify,
   decode
