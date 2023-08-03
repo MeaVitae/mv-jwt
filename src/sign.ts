@@ -1,13 +1,7 @@
-import {
-  arrayBufferToBase64Url,
-  base64ToObject,
-  checkKeyObject,
-  createKey,
-  objectToBase64Url,
-  supportedAlgorithms
-} from './utils'
+import { OptionsObject } from '.';
+import { arrayBufferToBase64Url, base64ToObject, checkKeyObject, createKey, objectToBase64Url, supportedAlgorithms } from './utils'
 
-export default async (tokenDataObject, privateJwkAsBase64, options) => {
+export default async <D>(tokenDataObject: D, privateJwkAsBase64: string, options: OptionsObject) => {
   if (!tokenDataObject) throw new Error('Token data is required')
   if (!privateJwkAsBase64) throw new Error('Private key is required')
   if (!options) throw new Error('Token signing options are required')

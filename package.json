@@ -1,31 +1,23 @@
 {
   "name": "@meavitae/mv-jwt",
-  "version": "1.0.11",
+  "version": "2.0.0",
   "description": "MeaVitae CF Worker JWT",
-  "main": "dist/bundle.js",
-  "types": "types/index.d.ts",
-  "files": [
-    "dist/bundle.js"
-  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "http://github.com/Meavitae/mv-jwt.git"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "tsup src/index.ts --format cjs,esm --dts"
   },
   "author": "danrobinson@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.28.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-webpack-plugin": "^2.5.4",
-    "faker": "^5.5.3",
-    "webpack": "^5.39.0",
-    "webpack-cli": "^4.7.2"
+    "@cloudflare/workers-types": "^4.20230801.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "jwt-decode": "^3.1.2"

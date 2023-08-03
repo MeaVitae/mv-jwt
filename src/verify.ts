@@ -1,13 +1,8 @@
 import decode from './decode'
-import {
-  arrayBufferFromBase64Url,
-  base64ToObject,
-  checkKeyObject,
-  createKey,
-  supportedAlgorithms
-} from './utils'
+import { OptionsObject } from '.'
+import { arrayBufferFromBase64Url, base64ToObject, checkKeyObject, createKey, supportedAlgorithms } from './utils'
 
-export default async (jwt, publicJwkAsBase64, options) => {
+export default async <B>(jwt: string, publicJwkAsBase64: string, options: OptionsObject): Promise<B> => {
   if (typeof jwt !== 'string') throw new Error('JWT string is required')
   if (!publicJwkAsBase64) throw new Error('Public key is required')
   if (!options) throw new Error('Token signing options are required')
@@ -38,7 +33,7 @@ export default async (jwt, publicJwkAsBase64, options) => {
   )
   if (!result) throw new Error('JWT signature is invalid')
 
-  const { header: { alg, typ }, body } = decode(jwt)
+  const { header: { alg, typ }, body } = decode<B>(jwt)
 
   if (alg !== options.algorithm) throw new Error('JWT algorithm is invalid')
   if (typ !== 'JWT') throw new Error('JWT type is invalid')
