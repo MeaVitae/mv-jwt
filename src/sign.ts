@@ -1,13 +1,7 @@
-import {
-  arrayBufferToBase64Url,
-  base64ToObject,
-  checkKeyObject,
-  createKey,
-  objectToBase64Url,
-  supportedAlgorithms
-} from './utils'
+import { OptionsObject } from './';
+import { arrayBufferToBase64Url, base64ToObject, checkKeyObject, objectToBase64Url, supportedAlgorithms } from './utils'
 
-export default async (tokenDataObject, privateJwkAsBase64, options) => {
+export default async <D>(tokenDataObject: D, privateJwkAsBase64: string, options: OptionsObject) => {
   if (!tokenDataObject) throw new Error('Token data is required')
   if (!privateJwkAsBase64) throw new Error('Private key is required')
   if (!options) throw new Error('Token signing options are required')
@@ -15,10 +9,10 @@ export default async (tokenDataObject, privateJwkAsBase64, options) => {
   const algorithm = supportedAlgorithms[options.algorithm]
   if (!algorithm) throw new Error('Algorithm not supported')
 
-  const privateJwkAsObject = base64ToObject(privateJwkAsBase64)
+  const privateJwkAsObject = base64ToObject<JsonWebKeyWithKid>(privateJwkAsBase64)
   checkKeyObject(privateJwkAsObject, options.algorithm, algorithm)
 
-  const signingKey = await createKey(privateJwkAsObject, algorithm, 'sign')
+  const signingKey = await crypto.subtle.importKey('jwk', privateJwkAsObject, algorithm, false, ['sign'])
   if (!signingKey) throw new Error('Could not create a signing key')
 
   const tokenHeaderObject = {
