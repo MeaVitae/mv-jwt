@@ -17,9 +17,19 @@ export type DecodedJwtHeader = {
   typ: 'JWT'
 }
 
-export type DecodeReturn<B = unknown> = {
-  body: B
+export type JwtBody<B = object> = B & {
+  iat: number
+  exp: number
+  iss: string
+}
+
+export type DecodeReturn<B = object> = {
+  body: JwtBody<B>
   header: DecodedJwtHeader
+}
+
+export type JsonWebKeyWithKid = JsonWebKey & {
+  kid: string
 }
 
 const jwt = {

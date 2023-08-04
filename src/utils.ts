@@ -1,3 +1,5 @@
+import { JsonWebKeyWithKid } from "./"
+
 const supportedAlgorithms = {
   ES384: {
     name: 'ECDSA',
@@ -6,27 +8,32 @@ const supportedAlgorithms = {
   }
 }
 
-const arrayBufferToBase64Url = buffer => btoa(
+type AlgorithmProperties = typeof supportedAlgorithms['ES384']
+
+const arrayBufferToBase64Url = (buffer: ArrayBuffer) => btoa(
   String.fromCharCode(...new Uint8Array(buffer))
 )
   .replace(/=/g, '')
   .replace(/\+/g, '-')
   .replace(/\//g, '_')
 
-const arrayBufferFromBase64Url = str => new Uint8Array(
-  Array.prototype.map.call(atob(
+const arrayBufferFromBase64Url = (str: string): ArrayBuffer => {
+  const stringFromBase64 = atob(
     str.replace(/-/g, '+')
       .replace(/_/g, '/')
       .replace(/\s/g, '')
-  ), c => c.charCodeAt(0))
-)
+  )
+  
+  const byteArray = new Uint8Array(stringFromBase64.length);
+  for(var i=0; i < stringFromBase64.length; i++) {
+    byteArray[i] = stringFromBase64.charCodeAt(i)
+  }
+  return byteArray
+}
 
-const base64ToObject = str => JSON.parse(atob(str))
+const base64ToObject = <R = object>(str: string): R => JSON.parse(atob(str))
 
-const createKey = async (jwkObject, algorithm, mode = 'verify') => crypto
-  .subtle.importKey('jwk', jwkObject, algorithm, false, [mode])
-
-const checkKeyObject = (key, algorithm, algorithmProperties) => {
+const checkKeyObject = (key: JsonWebKeyWithKid, algorithm: string, algorithmProperties: AlgorithmProperties) => {
   if (key.alg !== algorithm) throw new Error('Algorithm not found in private key')
   if (key.crv !== algorithmProperties.namedCurve) throw new Error('Curve not found in private key')
   if (key.kid !== algorithmProperties.hash.name) throw new Error('Hash not found in private key')
@@ -35,7 +42,7 @@ const checkKeyObject = (key, algorithm, algorithmProperties) => {
   return true
 }
 
-const objectToBase64Url = payloadObject => arrayBufferToBase64Url(
+const objectToBase64Url = (payloadObject: object) => arrayBufferToBase64Url(
   new TextEncoder().encode(JSON.stringify(payloadObject))
 )
 
@@ -44,7 +51,8 @@ export {
   arrayBufferToBase64Url,
   base64ToObject,
   checkKeyObject,
-  createKey,
   objectToBase64Url,
   supportedAlgorithms
 }
+
+
