@@ -5,6 +5,18 @@ const supportedAlgorithms = {
     name: 'ECDSA',
     namedCurve: 'P-384',
     hash: { name: 'SHA-384' }
+  },
+  RS256: {
+    name: "RSASSA-PKCS1-v1_5",
+    hash: { name: "SHA-256" }
+  },
+  RS384: {
+    name: "RSASSA-PKCS1-v1_5",
+    hash: { name: "SHA-384" }
+  },
+  RS512: {
+    name: "RSASSA-PKCS1-v1_5",
+    hash: { name: "SHA-512" }
   }
 }
 
