@@ -48,7 +48,7 @@ const base64ToObject = <R = object>(str: string): R => JSON.parse(atob(str))
 const checkKeyObject = (key: JsonWebKeyWithKid, algorithm: string, algorithmProperties: AlgorithmProperties, isPrivateKey: boolean = true) => {
   if (key.alg !== algorithm) throw new Error('Algorithm not found in key')
   if (isPrivateKey && (key.crv !== algorithmProperties.namedCurve)) throw new Error('Curve not found in private key')
-  if (key.kid !== algorithmProperties.hash.name) throw new Error('Hash not found in private key')
+  if (!key.kid) throw new Error('Key id not found in key')
   if (key.use !== 'sig') throw new Error('Key use is not for signing')
 
   return true
