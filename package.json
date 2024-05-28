@@ -1,6 +1,6 @@
 {
   "name": "@meavitae/mv-jwt",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "MeaVitae CF Worker JWT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
