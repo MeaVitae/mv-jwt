@@ -11,7 +11,7 @@ export default async <B>(jwt: string, publicJwkAsBase64: string, options: Option
   if (!algorithm) throw new Error('Algorithm not supported')
 
   const publicJwkAsObject = base64ToObject<JsonWebKeyWithKid>(publicJwkAsBase64)
-  checkKeyObject(publicJwkAsObject, options.algorithm, algorithm)
+  checkKeyObject(publicJwkAsObject, options.algorithm, algorithm, false)
 
   const verifyKey = await crypto.subtle.importKey('jwk', publicJwkAsObject, algorithm, false, ['verify'])
 
