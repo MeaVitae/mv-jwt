@@ -39,7 +39,6 @@ export default async <B>(jwt: string, publicJwkAsBase64: string, options: Option
   const { header: { alg, typ }, body } = decode<B>(jwt)
 
   if (alg !== options.algorithm) throw new Error('JWT algorithm is invalid')
-  if (typ !== 'JWT') throw new Error('JWT type is invalid')
 
   const clockTimestamp = Math.floor(Date.now() / 1000)
 
